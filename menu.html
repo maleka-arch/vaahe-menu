@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منوی واحه | Vaahe Hotel Restaurant</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:"Vazirmatn",Tahoma,Arial,sans-serif;
+    background:#111;
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* =========================
+   BACKGROUND SLIDER
+========================= */
+
+.background-slider{
+    position:fixed;
+    inset:0;
+    z-index:-10;
+    overflow:hidden;
+    background:#111;
+}
+
+.bg-slide{
+    position:absolute;
+    inset:0;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition:opacity 1.5s ease;
+}
+
+.bg-slide.active{
+    opacity:1;
+}
+
+.background-overlay{
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    background:
+        linear-gradient(
+            rgba(0,0,0,.62),
+            rgba(0,0,0,.78)
+        );
+}
+
+/* =========================
+   MAIN GLASS PAGE
+========================= */
+
+.page{
+    width:100%;
+    max-width:950px;
+    min-height:100vh;
+    margin:auto;
+    padding:92px 18px 60px;
+
+    /* شیشه‌ای واقعی و نیمه شفاف */
+    background:rgba(255,255,255,.055);
+    border-left:1px solid rgba(255,255,255,.08);
+    border-right:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(4px);
+    -webkit-backdrop-filter:blur(4px);
+}
+
+/* =========================
+   TOP BUTTONS
+========================= */
+
+.top-button{
+    position:fixed;
+    top:20px;
+    width:56px;
+    height:56px;
+    border-radius:19px;
+
+    border:1px solid rgba(255,255,255,.25);
+    background:rgba(255,255,255,.13);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+    cursor:pointer;
+    z-index:1000;
+
+    box-shadow:0 8px 30px rgba(0,0,0,.28);
+}
+
+.back-button{
+    left:18px;
+}
+
+.menu-button{
+    right:18px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo{
+    width:130px;
+    height:130px;
+    object-fit:cover;
+    border-radius:50%;
+    border:4px solid rgba(255,255,255,.95);
+    background:#fff;
+    box-shadow:0 12px 40px rgba(0,0,0,.45);
+}
+
+.restaurant-title{
+    margin-top:15px;
+    font-size:28px;
+    font-weight:800;
+}
+
+.restaurant-english{
+    margin-top:5px;
+    font-size:14px;
+    color:rgba(255,255,255,.85);
+    direction:ltr;
+    letter-spacing:2px;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box{
+    height:60px;
+    margin:28px 0 25px;
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 20px;
+
+    border-radius:21px;
+    border:1px solid rgba(255,255,255,.22);
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+}
+
+.search-icon{
+    font-size:26px;
+    opacity:.9;
+}
+
+#searchInput{
+    flex:1;
+    width:100%;
+    border:0;
+    outline:0;
+    background:transparent;
+    color:#fff;
+    font-family:inherit;
+    font-size:15px;
+    text-align:right;
+}
+
+#searchInput::placeholder{
+    color:rgba(255,255,255,.75);
+}
+
+/* =========================
+   CATEGORY GRID
+========================= */
+
+#categories{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:22px;
+    padding-bottom:30px;
+}
+
+/* =========================
+   CATEGORY CARD
+========================= */
+
+.category-card{
+    position:relative;
+    height:320px;
+    overflow:hidden;
+    border-radius:27px;
+    cursor:pointer;
+
+    border:1px solid rgba(255,255,255,.30);
+
+    background:rgba(255,255,255,.07);
+
+    box-shadow:
+        0 14px 40px rgba(0,0,0,.38);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.category-card:active{
+    transform:scale(.98);
+}
+
+.category-card:hover{
+    transform:translateY(-3px);
+    box-shadow:
+        0 18px 50px rgba(0,0,0,.48);
+}
+
+/* =========================
+   CATEGORY IMAGE
+========================= */
+
+.card-image{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.card-overlay{
+    position:absolute;
+    inset:0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.03) 15%,
+            rgba(0,0,0,.20) 42%,
+            rgba(0,0,0,.88) 100%
+        );
+}
+
+/* =========================
+   GLASS CARD TEXT
+========================= */
+
+.card-content{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+
+    min-height:116px;
+    padding:17px 10px 18px;
+
+    text-align:center;
+
+    background:rgba(30,40,35,.48);
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+    border-top:1px solid rgba(255,255,255,.20);
+}
+
+.title-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.title-row::before,
+.title-row::after{
+    content:"";
+    height:1px;
+    background:rgba(255,255,255,.85);
+    flex:1;
+}
+
+.card-title{
+    font-size:18px;
+    font-weight:800;
+    white-space:nowrap;
+}
+
+.card-english{
+    margin-top:6px;
+    font-size:11px;
+    direction:ltr;
+    color:rgba(255,255,255,.92);
+    letter-spacing:1px;
+}
+
+.card-line{
+    width:45px;
+    height:2px;
+    margin:10px auto 0;
+    border-radius:10px;
+    background:rgba(255,255,255,.85);
+}
+
+/* =========================
+   ITEMS PAGE
+========================= */
+
+#itemsPage{
+    display:none;
+}
+
+#itemsPage.active{
+    display:block;
+}
+
+.back-to-categories{
+    width:100%;
+    height:52px;
+    margin-bottom:18px;
+
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.22);
+
+    background:rgba(255,255,255,.12);
+    color:#fff;
+
+    font-family:inherit;
+    font-size:14px;
+    cursor:pointer;
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+}
+
+.items-header{
+    position:relative;
+    height:240px;
+    overflow:hidden;
+
+    border-radius:28px;
+    margin-bottom:20px;
+
+    border:1px solid rgba(255,255,255,.25);
+
+    box-shadow:0 12px 40px rgba(0,0,0,.35);
+}
+
+.items-header img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.items-header-overlay{
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.05),
+            rgba(0,0,0,.86)
+        );
+}
+
+.items-header-content{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:22px;
+
+    text-align:center;
+
+    background:rgba(25,35,30,.42);
+
+    backdrop-filter:blur(13px);
+    -webkit-backdrop-filter:blur(13px);
+
+    border-top:1px solid rgba(255,255,255,.16);
+}
+
+.items-header-content h2{
+    font-size:25px;
+    font-weight:800;
+}
+
+.items-header-content p{
+    margin-top:4px;
+    font-size:12px;
+    direction:ltr;
+    opacity:.85;
+}
+
+/* =========================
+   MENU ITEMS
+========================= */
+
+.items-list{
+    display:flex;
+    flex-direction:column;
+    gap:13px;
+}
+
+.menu-item{
+    display:flex;
+    align-items:center;
+    gap:13px;
+
+    min-height:90px;
+    padding:11px 13px;
+
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,.20);
+
+    background:rgba(255,255,255,.105);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:0 8px 25px rgba(0,0,0,.18);
+}
+
+.item-image{
+    width:70px;
+    height:70px;
+    flex-shrink:0;
+
+    object-fit:cover;
+    border-radius:16px;
+
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.item-info{
+    flex:1;
+    min-width:0;
+}
+
+.item-name{
+    font-size:15px;
+    font-weight:800;
+}
+
+.item-english{
+    margin-top:2px;
+    font-size:10px;
+    direction:ltr;
+    opacity:.68;
+}
+
+.item-description{
+    margin-top:5px;
+    font-size:10px;
+    line-height:1.7;
+    color:rgba(255,255,255,.72);
+}
+
+.item-price{
+    white-space:nowrap;
+    font-size:13px;
+    font-weight:800;
+}
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.side-menu{
+    position:fixed;
+    top:0;
+    right:0;
+
+    width:min(350px,88%);
+    height:100vh;
+
+    z-index:2000;
+
+    padding:90px 25px 30px;
+
+    background:rgba(22,30,26,.78);
+
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+
+    border-left:1px solid rgba(255,255,255,.18);
+
+    transform:translateX(100%);
+    transition:transform .35s ease;
+}
+
+.side-menu.active{
+    transform:translateX(0);
+}
+
+.close-menu{
+    position:absolute;
+    top:20px;
+    left:20px;
+
+    width:48px;
+    height:48px;
+
+    border-radius:16px;
+
+    border:1px solid rgba(255,255,255,.20);
+    background:rgba(255,255,255,.10);
+
+    color:#fff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.side-menu h2{
+    font-size:27px;
+    margin-bottom:20px;
+}
+
+.side-menu-item{
+    padding:18px 5px;
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+
+    font-size:16px;
+    cursor:pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .page{
+        padding:88px 14px 50px;
+    }
+
+    .logo{
+        width:120px;
+        height:120px;
+    }
+
+    .restaurant-title{
+        font-size:24px;
+    }
+
+    .restaurant-english{
+        font-size:11px;
+    }
+
+    #categories{
+        gap:18px;
+    }
+
+    .category-card{
+        height:315px;
+        border-radius:23px;
+    }
+
+    .card-content{
+        min-height:112px;
+        padding:15px 8px;
+    }
+
+    .card-title{
+        font-size:16px;
+    }
+
+    .card-english{
+        font-size:10px;
+    }
+
+    .top-button{
+        width:52px;
+        height:52px;
+        top:18px;
+    }
+
+    .back-button{
+        left:13px;
+    }
+
+    .menu-button{
+        right:13px;
+    }
+
+    .items-header{
+        height:220px;
+    }
+
+    .items-header-content h2{
+        font-size:23px;
+    }
+
+    .item-image{
+        width:65px;
+        height:65px;
+    }
+
+    .item-name{
+        font-size:14px;
+    }
+}
+
+@media(max-width:370px){
+
+    #categories{
+        gap:12px;
+    }
+
+    .category-card{
+        height:285px;
+    }
+
+    .card-title{
+        font-size:14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================
+     عکس‌های پس‌زمینه
+     چون فایل‌ها کنار menu.html هستند،
+     مسیر ../ اشتباه است.
+========================================= -->
+
+<div class="background-slider">
+
+    <div
+        class="bg-slide active"
+        style="background-image:url('photo_5902135692026909354_w.jpg')">
+    </div>
+
+    <div
+        class="bg-slide"
+        style="background-image:url('photo_5902135692026909355_w.jpg')">
+    </div>
+
+    <div
+        class="bg-slide"
+        style="background-image:url('photo_5902135692026909360_w.jpg')">
+    </div>
+
+    <div
+        class="bg-slide"
+        style="background-image:url('photo_5902135692026909361_w.jpg')">
+    </div>
+
+</div>
+
+<div class="background-overlay"></div>
+
+
+<!-- دکمه بازگشت -->
+
+<button
+    class="top-button back-button"
+    onclick="goBack()"
+    aria-label="بازگشت">
+    ‹
+</button>
+
+
+<!-- دکمه منو -->
+
+<button
+    class="top-button menu-button"
+    onclick="openMenu()"
+    aria-label="منو">
+    ☰
+</button>
+
+
+<main class="page">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <img
+            src="logo.png"
+            class="logo"
+            alt="واحه هتل رستوران">
+
+        <h1 class="restaurant-title">
+            واحه هتل رستوران
+        </h1>
+
+        <div class="restaurant-english">
+            VAAHE HOTEL RESTAURANT
+        </div>
+
+    </header>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-box">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="محصول مورد نظر خود را جستجو کنید..."
+            oninput="searchItems()">
+
+    </div>
+
+
+    <!-- CATEGORY PAGE -->
+
+    <section id="categories"></section>
+
+
+    <!-- ITEMS PAGE -->
+
+    <section id="itemsPage">
+
+        <button
+            class="back-to-categories"
+            onclick="showCategories()">
+            ← بازگشت به دسته‌بندی‌ها
+        </button>
+
+        <div id="itemsContent"></div>
+
+    </section>
+
+</main>
+
+
+<!-- SIDE MENU -->
+
+<aside class="side-menu" id="sideMenu">
+
+    <button
+        class="close-menu"
+        onclick="closeMenu()">
+        ×
+    </button>
+
+    <h2>واحه</h2>
+
+    <div
+        class="side-menu-item"
+        onclick="goHome()">
+        🏠 صفحه اصلی
+    </div>
+
+    <div
+        class="side-menu-item"
+        onclick="showCategories();closeMenu()">
+        🍽️ دسته‌بندی منو
+    </div>
+
+    <div class="side-menu-item">
+        ℹ️ درباره رستوران
+    </div>
+
+    <div class="side-menu-item">
+        📍 موقعیت واحه
+    </div>
+
+    <div class="side-menu-item">
+        📞 تماس با ما
+    </div>
+
+</aside>
+
+
+<script>
+
+/* =========================================
+   BACKGROUND SLIDER
+========================================= */
+
+const bgSlides =
+    document.querySelectorAll(".bg-slide");
+
+let currentBg = 0;
+
+setInterval(function(){
+
+    bgSlides[currentBg].classList.remove("active");
+
+    currentBg =
+        (currentBg + 1) % bgSlides.length;
+
+    bgSlides[currentBg].classList.add("active");
+
+},7000);
+
+
+/* =========================================
+   دسته‌بندی‌ها
+========================================= */
+
+const categories = [
+
+    {
+        id:"breakfast",
+        name:"صبحانه",
+        english:"Breakfast",
+        image:"photo_5902135692026909355_w.jpg"
+    },
+
+    {
+        id:"bakery",
+        name:"بیکری",
+        english:"Bakery",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        id:"appetizer",
+        name:"پیش غذا",
+        english:"Appetizer",
+        image:"photo_5902135692026909355_w.jpg"
+    },
+
+    {
+        id:"salad",
+        name:"سالادها",
+        english:"Salads",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        id:"burger",
+        name:"برگر",
+        english:"Burgers",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        id:"pizza",
+        name:"پیتزا ایتالیایی",
+        english:"Italian Pizza",
+        image:"photo_5902135692026909361_w.jpg"
+    },
+
+    {
+        id:"pasta",
+        name:"پاستا",
+        english:"Pasta",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        id:"steak",
+        name:"استیک",
+        english:"Steak",
+        image:"photo_5902135692026909361_w.jpg"
+    },
+
+    {
+        id:"vegetarian",
+        name:"وجترین",
+        english:"Vegetarian",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        id:"vegan",
+        name:"وگان",
+        english:"Vegan",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        id:"cold",
+        name:"نوشیدنی‌های سرد",
+        english:"Cold Drinks",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        id:"hot",
+        name:"نوشیدنی‌های گرم",
+        english:"Hot Coffee",
+        image:"photo_5902135692026909355_w.jpg"
+    },
+
+    {
+        id:"matcha",
+        name:"ماچا بار",
+        english:"Matcha Bar",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        id:"tea",
+        name:"چای و دمنوش",
+        english:"Tea & Herbal",
+        image:"photo_5902135692026909361_w.jpg"
+    }
+
+];
+
+
+/* =========================================
+   آیتم‌های منو
+========================================= */
+
+const menuItems = [
+
+    {
+        category:"breakfast",
+        name:"صبحانه واحه",
+        english:"Vaahe Breakfast",
+        description:"صبحانه کامل و تازه واحه",
+        price:"—",
+        image:"photo_5902135692026909355_w.jpg"
+    },
+
+    {
+        category:"breakfast",
+        name:"صبحانه انگلیسی",
+        english:"English Breakfast",
+        description:"تخم مرغ، سوسیس، لوبیا و نان تازه",
+        price:"—",
+        image:"photo_5902135692026909355_w.jpg"
+    },
+
+    {
+        category:"bakery",
+        name:"نان تازه",
+        english:"Fresh Bread",
+        description:"نان تازه و روزانه",
+        price:"—",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        category:"appetizer",
+        name:"سیب‌زمینی",
+        english:"French Fries",
+        description:"سیب‌زمینی ترد با سس مخصوص",
+        price:"—",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        category:"appetizer",
+        name:"پیش غذای واحه",
+        english:"Vaahe Appetizer",
+        description:"ترکیبی از پیش‌غذاهای مخصوص",
+        price:"—",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        category:"salad",
+        name:"سالاد واحه",
+        english:"Vaahe Salad",
+        description:"سالاد تازه با سبزیجات متنوع",
+        price:"—",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        category:"burger",
+        name:"برگر کلاسیک",
+        english:"Classic Burger",
+        description:"برگر گوشت با نان تازه و مخلفات",
+        price:"—",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        category:"burger",
+        name:"چیزبرگر",
+        english:"Cheeseburger",
+        description:"برگر گوشت، پنیر و مخلفات",
+        price:"—",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        category:"pizza",
+        name:"پیتزا مارگاریتا",
+        english:"Margherita",
+        description:"سس گوجه، پنیر و ریحان",
+        price:"—",
+        image:"photo_5902135692026909361_w.jpg"
+    },
+
+    {
+        category:"pizza",
+        name:"پیتزا سبزیجات",
+        english:"Vegetable Pizza",
+        description:"سبزیجات تازه و پنیر",
+        price:"—",
+        image:"photo_5902135692026909361_w.jpg"
+    },
+
+    {
+        category:"pasta",
+        name:"پاستا",
+        english:"Pasta",
+        description:"پاستای تازه با سس مخصوص",
+        price:"—",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        category:"steak",
+        name:"استیک",
+        english:"Steak",
+        description:"استیک گریل شده با دورچین",
+        price:"—",
+        image:"photo_5902135692026909361_w.jpg"
+    },
+
+    {
+        category:"vegetarian",
+        name:"پاستای سبزیجات",
+        english:"Vegetarian Pasta",
+        description:"پاستا با سبزیجات تازه",
+        price:"—",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        category:"vegetarian",
+        name:"سالاد وجترین",
+        english:"Vegetarian Salad",
+        description:"سالاد تازه و متنوع",
+        price:"—",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        category:"vegan",
+        name:"سالاد وگان",
+        english:"Vegan Salad",
+        description:"سبزیجات تازه بدون فرآورده حیوانی",
+        price:"—",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        category:"vegan",
+        name:"پاستای وگان",
+        english:"Vegan Pasta",
+        description:"پاستا با سبزیجات و سس گیاهی",
+        price:"—",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        category:"cold",
+        name:"آیس کافی",
+        english:"Iced Coffee",
+        description:"قهوه سرد و خنک",
+        price:"—",
+        image:"photo_5902135692026909354_w.jpg"
+    },
+
+    {
+        category:"hot",
+        name:"اسپرسو",
+        english:"Espresso",
+        description:"اسپرسوی تازه",
+        price:"—",
+        image:"photo_5902135692026909355_w.jpg"
+    },
+
+    {
+        category:"matcha",
+        name:"ماچا",
+        english:"Matcha",
+        description:"ماچای تازه",
+        price:"—",
+        image:"photo_5902135692026909360_w.jpg"
+    },
+
+    {
+        category:"tea",
+        name:"چای و دمنوش",
+        english:"Tea & Herbal",
+        description:"چای و دمنوش‌های گرم",
+        price:"—",
+        image:"photo_5902135692026909361_w.jpg"
+    }
+
+];
+
+
+/* =========================================
+   نمایش دسته‌بندی‌ها
+========================================= */
+
+function showCategories(list = categories){
+
+    const categoriesBox =
+        document.getElementById("categories");
+
+    const itemsPage =
+        document.getElementById("itemsPage");
+
+    categoriesBox.style.display = "grid";
+
+    itemsPage.classList.remove("active");
+
+    categoriesBox.innerHTML = "";
+
+    list.forEach(function(category){
+
+        const card =
+            document.createElement("div");
+
+        card.className = "category-card";
+
+        card.innerHTML = `
+
+            <img
+                src="${category.image}"
+                class="card-image"
+                alt="${category.name}"
+            >
+
+            <div class="card-overlay"></div>
+
+            <div class="card-content">
+
+                <div class="title-row">
+
+                    <div class="card-title">
+                        ${category.name}
+                    </div>
+
+                </div>
+
+                <div class="card-english">
+                    ${category.english}
+                </div>
+
+                <div class="card-line"></div>
+
+            </div>
+
+        `;
+
+        card.addEventListener(
+            "click",
+            function(){
+                openCategory(category.id);
+            }
+        );
+
+        categoriesBox.appendChild(card);
+
+    });
+}
+
+
+/* =========================================
+   باز کردن یک دسته
+========================================= */
+
+function openCategory(categoryId){
+
+    const category =
+        categories.find(
+            function(item){
+                return item.id === categoryId;
+            }
+        );
+
+    if(!category){
+        return;
+    }
+
+    const categoriesBox =
+        document.getElementById("categories");
+
+    const itemsPage =
+        document.getElementById("itemsPage");
+
+    const itemsContent =
+        document.getElementById("itemsContent");
+
+    categoriesBox.style.display = "none";
+
+    itemsPage.classList.add("active");
+
+    const products =
+        menuItems.filter(
+            function(item){
+                return item.category === categoryId;
+            }
+        );
+
+    let html = `
+
+        <div class="items-header">
+
+            <img
+                src="${category.image}"
+                alt="${category.name}"
+            >
+
+            <div class="items-header-overlay"></div>
+
+            <div class="items-header-content">
+
+                <h2>
+                    ${category.name}
+                </h2>
+
+                <p>
+                    ${category.english}
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="items-list">
+
+    `;
+
+    if(products.length === 0){
+
+        html += `
+
+            <div class="menu-item">
+
+                <div class="item-info">
+
+                    <div class="item-name">
+                        به‌زودی
+                    </div>
+
+                    <div class="item-description">
+                        آیتم‌های این بخش در حال تکمیل هستند.
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    }else{
+
+        products.forEach(function(item){
+
+            html += `
+
+                <div class="menu-item">
+
+                    <img
+                        class="item-image"
+                        src="${item.image}"
+                        alt="${item.name}"
+                    >
+
+                    <div class="item-info">
+
+                        <div class="item-name">
+                            ${item.name}
+                        </div>
+
+                        <div class="item-english">
+                            ${item.english}
+                        </div>
+
+                        <div class="item-description">
+                            ${item.description}
+                        </div>
+
+                    </div>
+
+                    <div class="item-price">
+                        ${item.price}
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+    html += `</div>`;
+
+    itemsContent.innerHTML = html;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================================
+   جستجو
+========================================= */
+
+function searchItems(){
+
+    const value =
+        document
+            .getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
+
+    if(value === ""){
+
+        showCategories();
+
+        return;
+    }
+
+    const result =
+        categories.filter(function(category){
+
+            const categoryMatch =
+                category.name
+                    .toLowerCase()
+                    .includes(value)
+                ||
+                category.english
+                    .toLowerCase()
+                    .includes(value);
+
+            const itemMatch =
+                menuItems.some(function(item){
+
+                    return item.category === category.id
+                        &&
+                        (
+                            item.name
+                                .toLowerCase()
+                                .includes(value)
+                            ||
+                            item.english
+                                .toLowerCase()
+                                .includes(value)
+                        );
+
+                });
+
+            return categoryMatch || itemMatch;
+
+        });
+
+    showCategories(result);
+}
+
+
+/* =========================================
+   SIDE MENU
+========================================= */
+
+function openMenu(){
+
+    document
+        .getElementById("sideMenu")
+        .classList.add("active");
+
+}
+
+function closeMenu(){
+
+    document
+        .getElementById("sideMenu")
+        .classList.remove("active");
+
+}
+
+
+/* =========================================
+   صفحه اصلی
+========================================= */
+
+function goHome(){
+
+    /*
+       چون menu.html داخل همان پوشه OasisMenu
+       و index.html هم همانجاست:
+    */
+
+    window.location.href = "index.html";
+
+}
+
+
+/* =========================================
+   دکمه بازگشت
+========================================= */
+
+function goBack(){
+
+    const itemsPage =
+        document.getElementById("itemsPage");
+
+    if(itemsPage.classList.contains("active")){
+
+        showCategories();
+
+        return;
+
+    }
+
+    if(window.history.length > 1){
+
+        window.history.back();
+
+    }else{
+
+        window.location.href = "index.html";
+
+    }
+
+}
+
+
+/* =========================================
+   شروع
+========================================= */
+
+showCategories();
+
+</script>
+
+</body>
+</html>

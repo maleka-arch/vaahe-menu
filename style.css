@@ -1,0 +1,317 @@
+ * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Vazirmatn', sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #17251d;
+}
+
+
+/* =========================
+   عکس پس زمینه
+========================= */
+
+.background-image {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-image: url("bg.jpg");
+
+  background-size: cover;
+  background-position: center;
+
+  background-repeat: no-repeat;
+
+  filter: blur(5px) brightness(0.62);
+
+  transform: scale(1.06);
+
+  z-index: 1;
+}
+
+
+/* =========================
+   لایه روی عکس
+========================= */
+
+.overlay {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: rgba(15, 25, 19, 0.48);
+
+  z-index: 2;
+}
+
+
+/* =========================
+   کل محتوای صفحه
+========================= */
+
+.main-card {
+  position: relative;
+
+  z-index: 3;
+
+  width: min(90%, 390px);
+
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  padding: 30px 20px;
+}
+
+
+/* =========================
+   دایره لوگو
+========================= */
+
+.logo-wrapper {
+  width: 170px;
+  height: 170px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.45);
+
+  margin-bottom: 18px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+
+/* =========================
+   خود لوگو
+========================= */
+
+.restaurant-logo {
+  width: 125%;
+  height: 125%;
+
+  max-width: none;
+
+  object-fit: cover;
+
+  display: block;
+
+  border: none;
+
+  outline: none;
+
+  border-radius: 0;
+
+  transform: scale(1.08);
+}
+
+
+/* =========================
+   عنوان فارسی
+========================= */
+
+.brand-title-fa {
+  color: #fff;
+
+  font-size: 1.5rem;
+
+  font-weight: 700;
+
+  line-height: 1.7;
+
+  margin: 0 0 2px 0;
+
+  text-align: center;
+
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================
+   عنوان انگلیسی
+========================= */
+
+.brand-title-en {
+  color: #eee8dd;
+
+  font-size: 0.9rem;
+
+  font-weight: 400;
+
+  direction: ltr;
+
+  margin: 0;
+
+  text-align: center;
+
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================
+   خط
+========================= */
+
+.green-divider {
+  width: 75%;
+
+  height: 1px;
+
+  margin: 17px 0;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.7),
+    transparent
+  );
+}
+
+
+/* =========================
+   متن
+========================= */
+
+.info-box {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  color: #f7f2e9;
+
+  font-size: 0.9rem;
+
+  line-height: 1.9;
+
+  text-align: center;
+
+  text-shadow: 0 2px 7px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =========================
+   دکمه
+========================= */
+
+.continue-btn {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  width: 100%;
+
+  margin-top: 25px;
+
+  padding: 13px;
+
+  color: #fff;
+
+  background: rgba(45, 64, 52, 0.75);
+
+  border: 1px solid rgba(255,255,255,0.45);
+
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  backdrop-filter: blur(8px);
+
+  -webkit-backdrop-filter: blur(8px);
+}
+
+
+/* =========================
+   موبایل
+========================= */
+
+@media (max-width: 480px) {
+
+  .main-card {
+    width: 92%;
+    padding: 20px;
+  }
+
+  .logo-wrapper {
+    width: 155px;
+    height: 155px;
+  }
+
+  .restaurant-logo {
+    width: 125%;
+    height: 125%;
+  }
+
+  .brand-title-fa {
+    font-size: 1.4rem;
+  }
+
+  .brand-title-en {
+    font-size: 0.85rem;
+  }
+
+  .info-box {
+    font-size: 0.86rem;
+  }
+
+}
