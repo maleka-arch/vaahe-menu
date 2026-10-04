@@ -1,1074 +1,291 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>هتل رستوران واحه</title>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:#07140d;color:#fff;display:flex;justify-content:center}
+button,a{font-family:inherit}
 
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap');
+.app-container{position:relative;width:100%;max-width:480px;height:100vh;min-height:560px;overflow:hidden;background:#07140d}
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
+/* =========================
+   پس زمینه — فقط محو شدن، بدون زوم
+========================= */
+.bg-slider{position:absolute;inset:0;z-index:1;overflow:hidden;background:#07140d}
+.bg-slide{position:absolute;inset:0;width:100%;height:100%;background-repeat:no-repeat;background-size:cover;background-position:center;opacity:0;transition:opacity 1.6s ease-in-out;transform:none}
+.bg-slide.active{opacity:1;transform:none}
+.bg-overlay{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,rgba(4,15,10,.22),rgba(4,15,10,.08) 46%,rgba(3,12,8,.48) 100%)}
 
-html,
-body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    font-family:'Vazirmatn',sans-serif;
-    background:#07140d;
-}
+/* =========================
+   شیشه بالایی
+========================= */
+.glass-top{position:absolute;top:0;left:0;right:0;height:330px;z-index:10;border:1px solid rgba(255,255,255,.22);border-top:0;border-radius:0 0 40px 40px;background:rgba(25,38,31,.19);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 14px 35px rgba(0,0,0,.08);pointer-events:none}
 
-body{
-    display:flex;
-    justify-content:center;
-}
-
-
-/* =====================================================
-   صفحه اصلی
-===================================================== */
-
-.app-container{
-
-    position:relative;
-
-    width:100%;
-    max-width:480px;
-
-    height:100vh;
-    min-height:600px;
-
-    overflow:hidden;
-
-    background:#07140d;
-}
-
-
-/* =====================================================
-   عکس های پس زمینه
-===================================================== */
-
-.bg-slider{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    z-index:1;
-
-    overflow:hidden;
-}
-
-.bg-slide{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-position:center;
-
-    opacity:0;
-
-    transform:scale(1.02);
-
-    transition:
-        opacity 2s ease-in-out,
-        transform 7s ease-in-out;
-}
-
-.bg-slide.active{
-
-    opacity:1;
-
-    transform:scale(1);
-}
-
-
-/* =====================================================
-   تاریکی خیلی ملایم روی عکس
-===================================================== */
-
-.bg-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    z-index:2;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(4,15,10,.14) 0%,
-            rgba(4,15,10,.04) 48%,
-            rgba(3,12,8,.38) 100%
-        );
-
-    pointer-events:none;
-}
-
-
-/* =====================================================
+/* =========================
    دکمه های بالا
-   روی شیشه قرار می گیرند
-===================================================== */
+========================= */
+.top-nav{position:absolute;top:14px;left:14px;right:14px;height:54px;z-index:100;display:flex;justify-content:space-between;direction:ltr;pointer-events:none}
+.nav-btn{width:54px;height:54px;border-radius:17px;border:1px solid rgba(255,255,255,.20);background:rgba(70,75,70,.20);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:#fff;font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:inset 2px 2px 5px rgba(255,255,255,.10),inset -3px -3px 7px rgba(0,0,0,.10),0 6px 18px rgba(0,0,0,.12);pointer-events:auto}
+.nav-btn:active{transform:scale(.96)}
 
-.top-nav{
-
-    position:absolute;
-
-    top:16px;
-
-    left:16px;
-    right:16px;
-
-    height:56px;
-
-    z-index:100;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    direction:ltr;
-
-    pointer-events:none;
-}
-
-.nav-btn{
-
-    width:56px;
-    height:56px;
-
-    border-radius:17px;
-
-    border:1px solid rgba(255,255,255,.20);
-
-    background:
-        rgba(70,75,70,.20);
-
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-
-    color:#fff;
-
-    font-size:21px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    box-shadow:
-        inset 2px 2px 5px rgba(255,255,255,.10),
-        inset -3px -3px 7px rgba(0,0,0,.10),
-        0 6px 18px rgba(0,0,0,.10);
-
-    pointer-events:auto;
-}
-
-
-/* =====================================================
-   شیشه اصلی
-   کاملاً چسبیده به بالای صفحه
-===================================================== */
-
-.glass-top{
-
-    position:absolute;
-
-    top:0;
-    left:0;
-    right:0;
-
-    height:330px;
-
-    z-index:10;
-
-    border-radius:
-        0 0 40px 40px;
-
-    background:
-        rgba(180,190,185,.075);
-
-    border:
-        1px solid rgba(255,255,255,.23);
-
-    backdrop-filter:blur(3px);
-    -webkit-backdrop-filter:blur(3px);
-
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.12),
-        0 15px 35px rgba(0,0,0,.06);
-
-    pointer-events:none;
-}
-
-
-/* =====================================================
-   شیشه دوم
-===================================================== */
-
-.glass-second{
-
-    position:absolute;
-
-    top:330px;
-
-    left:16px;
-    right:16px;
-
-    height:75px;
-
-    z-index:9;
-
-    border-radius:
-        0 0 30px 30px;
-
-    background:
-        rgba(255,255,255,.025);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-
-    backdrop-filter:blur(2px);
-    -webkit-backdrop-filter:blur(2px);
-
-    pointer-events:none;
-}
-/* =====================================================
+/* =========================
    لوگو
-===================================================== */
-
-.logo-wrapper{
-
-    position:absolute;
-
-    top:112px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:112px;
-    height:112px;
-
-    z-index:25;
-}
-
-.restaurant-logo{
-
-    width:100%;
-    height:100%;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    border:3px solid rgba(255,255,255,.95);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    box-shadow:
-        0 9px 28px rgba(0,0,0,.28);
-}
-
-.restaurant-logo span{
-
-    font-size:45px;
-
-    font-weight:900;
-
-    color:#102d1d;
-}
-
-
-/* =====================================================
-   تیک تایید
-===================================================== */
-
-.verified-badge{
-
-    position:absolute;
-
-    right:-4px;
-    bottom:0;
-
-    width:36px;
-    height:36px;
-
-    border-radius:50%;
-
-    background:#149ee7;
-
-    border:3px solid white;
-
-    color:white;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:15px;
-}
-
-
-/* =====================================================
-   نوشته های واحه
-===================================================== */
-
-.profile-info{
-
-    position:absolute;
-
-    top:238px;
-
-    left:20px;
-    right:20px;
-
-    z-index:30;
-
-    text-align:center;
-
-    color:white;
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.35);
-}
-
-.restaurant-title{
-
-    font-size:25px;
-
-    font-weight:700;
-
-    line-height:1.5;
-}
-
-.restaurant-subtitle{
-
-    direction:ltr;
-
-    margin-top:1px;
-
-    font-size:18px;
-
-    color:rgba(255,255,255,.82);
-}
-
-.restaurant-description{
-
-    margin:13px auto 0;
-
-    padding-top:10px;
-
-    width:82%;
-
-    border-top:
-        1px solid
-        rgba(255,255,255,.18);
-
-    font-size:12px;
-
-    line-height:1.8;
-
-    color:rgba(255,255,255,.88);
-}
-
-
-/* =====================================================
-   OPEN
-   کوچکتر، شفاف تر و چسبیده تر به سمت چپ
-===================================================== */
-
-.status-badge{
-
-    position:absolute;
-
-    top:420px;
-
-    left:-22px;
-
-    z-index:40;
-
-    width:145px;
-    height:52px;
-
-    border-radius:
-        0 18px 18px 0;
-
-    background:
-        rgba(55,54,50,.46);
-
-    border:
-        1px solid rgba(255,255,255,.15);
-
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-
-    color:rgba(255,255,255,.86);
-
-    font-size:16px;
-
-    direction:ltr;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:7px;
-
-    box-shadow:
-        inset 1px 1px 4px rgba(255,255,255,.08),
-        inset -2px -2px 6px rgba(0,0,0,.10),
-        0 6px 16px rgba(0,0,0,.10);
-}
-
-.status-dot{
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#2ed66d;
-
-    box-shadow:
-        0 0 6px rgba(46,214,109,.75);
-}
-
-
-/* =====================================================
-   بخش پایین
-===================================================== */
-
-.bottom-section{
-
-    position:absolute;
-
-    left:18px;
-    right:18px;
-
-    bottom:20px;
-
-    z-index:50;
-}
-
-
-/* =====================================================
-   آیکون ها
-===================================================== */
-
-.action-icons-row{
-
-    width:100%;
-
-    display:flex;
-
-    gap:10px;
-
-    direction:ltr;
-
-    margin-bottom:13px;
-}
-
-.glass-icon-btn{
-
-    flex:1;
-
-    height:64px;
-
-    border-radius:21px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.28);
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.22),
-            rgba(100,100,95,.16)
-        );
-
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:25px;
-
-    box-shadow:
-        inset 3px 3px 7px rgba(255,255,255,.14),
-        inset -4px -4px 8px rgba(0,0,0,.14),
-        0 9px 22px rgba(0,0,0,.14);
-}
-
-
-/* =====================================================
-   مشاهده منو
-===================================================== */
-
-.btn-view-menu{
-  width:100%;
-
-    height:70px;
-
-    border-radius:19px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1b5738,
-            #104029 50%,
-            #08291b
-        );
-
-    border:
-        1px solid
-        rgba(92,165,119,.55);
-
-    color:white;
-
-    font-size:20px;
-
-    font-weight:800;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    text-decoration:none;
-
-    box-shadow:
-        inset 3px 3px 7px rgba(255,255,255,.10),
-        inset -4px -4px 9px rgba(0,0,0,.30),
-        0 12px 28px rgba(0,0,0,.30);
-}
-
-
-/* =====================================================
-   ارتفاع های کم
-===================================================== */
-
+========================= */
+.logo-wrapper{position:absolute;top:100px;left:50%;transform:translateX(-50%);width:108px;height:108px;z-index:25}
+.restaurant-logo{width:108px;height:108px;border-radius:50%;background:#a5cb95;border:3px solid rgba(255,255,255,.92);display:block;object-fit:cover;box-shadow:0 9px 28px rgba(0,0,0,.30)}
+.verified-badge{position:absolute;right:-3px;bottom:0;width:31px;height:31px;border-radius:50%;background:#159ee7;border:3px solid #fff;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+
+/* =========================
+   نوشته های هدر
+========================= */
+.profile-info{position:absolute;top:220px;left:18px;right:18px;z-index:30;text-align:center;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.35)}
+.restaurant-title{font-size:24px;font-weight:800;line-height:1.5}
+.restaurant-subtitle{direction:ltr;margin-top:1px;font-size:16px;color:rgba(255,255,255,.84)}
+.restaurant-description{position:relative;margin:12px auto 0;padding-top:10px;width:82%;font-size:12px;line-height:1.8;color:rgba(255,255,255,.86)}
+.restaurant-description:before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.34) 18%,rgba(255,255,255,.34) 82%,transparent)}
+
+/* =========================
+   OPEN شبیه لیلو، بدون نقطه سبز
+========================= */
+.status-badge{position:absolute;top:382px;left:-8px;z-index:40;width:118px;height:45px;border-radius:0 18px 18px 0;background:rgba(55,54,50,.54);border:1px solid rgba(255,255,255,.16);border-left:0;backdrop-filter:blur(13px);-webkit-backdrop-filter:blur(13px);color:rgba(255,255,255,.90);font-size:14px;direction:ltr;display:flex;align-items:center;justify-content:center;box-shadow:inset 1px 1px 4px rgba(255,255,255,.08),0 6px 16px rgba(0,0,0,.12)}
+.status-dot{display:none}
+
+/* =========================
+   پایین صفحه
+========================= */
+.bottom-section{position:absolute;left:14px;right:14px;bottom:12px;z-index:50}
+.action-icons-row{width:100%;display:flex;gap:9px;direction:ltr;margin-bottom:10px}
+.glass-icon-btn{flex:1;height:58px;border-radius:20px;border:1px solid rgba(255,255,255,.27);background:linear-gradient(145deg,rgba(255,255,255,.22),rgba(100,100,95,.15));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:23px;box-shadow:inset 3px 3px 7px rgba(255,255,255,.13),inset -4px -4px 8px rgba(0,0,0,.14),0 9px 22px rgba(0,0,0,.14);cursor:pointer}
+.glass-icon-btn:active{transform:scale(.96)}
+.btn-view-menu{width:100%;height:58px;border-radius:18px;background:linear-gradient(145deg,#1b5738,#104029 50%,#08291b);border:1px solid rgba(92,165,119,.55);color:#fff;font-size:18px;font-weight:800;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:inset 3px 3px 7px rgba(255,255,255,.10),inset -4px -4px 9px rgba(0,0,0,.30),0 10px 25px rgba(0,0,0,.28)}
+.btn-view-menu:active{transform:scale(.985)}
+
+/* =========================
+   پنجره شیشه ای برای ساعت و تماس
+========================= */
+.modal-backdrop{position:absolute;inset:0;z-index:500;background:rgba(0,0,0,.30);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);display:none;align-items:flex-end;justify-content:center;padding:0 16px 16px}
+.modal-backdrop.active{display:flex}
+.glass-modal{width:100%;max-height:76vh;overflow:auto;border:1px solid rgba(255,255,255,.24);border-radius:28px;background:rgba(40,48,44,.66);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 20px 60px rgba(0,0,0,.35);padding:22px 18px 18px;color:#fff;position:relative}
+.modal-close{position:absolute;top:12px;left:12px;width:40px;height:40px;border:1px solid rgba(255,255,255,.18);border-radius:13px;background:rgba(255,255,255,.08);color:#fff;font-size:23px;cursor:pointer}
+.modal-title{text-align:right;font-size:22px;font-weight:800;margin:0 46px 18px 0}
+.hours-list{display:grid;gap:9px}
+.hour-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:55px;padding:10px 13px;border-radius:16px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.12);font-size:13px}
+.hour-row strong{font-size:14px}
+.contact-box{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px;border-radius:18px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.12);font-size:15px}
+.contact-box a{color:#fff;text-decoration:none;direction:ltr}
+
+/* =========================
+   منوی سه خط — پنل شیشه ای با رنگ واحه
+========================= */
+.side-menu-backdrop{position:absolute;inset:0;z-index:800;background:rgba(0,0,0,.28);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none}
+.side-menu-backdrop.active{display:block}
+.side-menu{position:absolute;top:0;right:0;width:min(360px,88%);height:100%;z-index:900;padding:34px 24px 25px;background:rgba(22,43,32,.91);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-left:1px solid rgba(255,255,255,.18);transform:translateX(100%);transition:transform .35s ease;overflow:auto}
+.side-menu.active{transform:translateX(0)}
+.side-close{position:absolute;top:18px;left:18px;width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.08);color:#fff;font-size:24px;cursor:pointer}
+.side-logo{width:92px;height:92px;display:block;border-radius:50%;margin:28px auto 12px;border:2px solid rgba(255,255,255,.9);background:#a5cb95;object-fit:cover;box-shadow:0 7px 22px rgba(0,0,0,.25)}
+.side-title{text-align:center;font-size:22px;font-weight:800}
+.side-subtitle{text-align:center;direction:ltr;color:rgba(255,255,255,.72);font-size:13px;margin-top:3px}
+.side-divider{height:1px;margin:22px 0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.30) 18%,rgba(255,255,255,.30) 82%,transparent)}
+.side-item{display:flex;align-items:center;gap:15px;padding:17px 7px;border-bottom:1px solid rgba(255,255,255,.10);color:#fff;text-decoration:none;font-size:16px;cursor:pointer}
+.side-item:last-child{border-bottom:0}
+.side-item i{width:28px;text-align:center;font-size:19px}
+.side-item span{flex:1}
+
+/* =========================
+   واکنشگرا برای گوشی های کوتاه
+========================= */
 @media(max-height:760px){
-
-    .top-nav{
-
-        top:12px;
-    }
-
-    .nav-btn{
-
-        width:52px;
-        height:52px;
-
-        font-size:20px;
-    }
-
-    .glass-top{
-
-        top:0;
-
-        height:300px;
-    }
-
-    .logo-wrapper{
-
-        top:94px;
-
-        width:98px;
-        height:98px;
-    }
-
-    .restaurant-logo span{
-
-        font-size:40px;
-    }
-
-    .verified-badge{
-
-        width:32px;
-        height:32px;
-
-        font-size:13px;
-    }
-
-    .profile-info{
-
-        top:202px;
-    }
-
-    .restaurant-title{
-
-        font-size:22px;
-    }
-
-    .restaurant-subtitle{
-
-        font-size:16px;
-    }
-
-    .restaurant-description{
-
-        margin-top:7px;
-
-        padding-top:7px;
-
-        font-size:10px;
-    }
-
-    .glass-second{
-
-        top:300px;
-
-        height:70px;
-    }
-
-    .status-badge{
-
-        top:390px;
-
-        left:-20px;
-
-        width:135px;
-        height:48px;
-
-        font-size:15px;
-    }
-
-    .status-dot{
-
-        width:6px;
-        height:6px;
-    }
-
-    .glass-icon-btn{
-
-        height:56px;
-
-        font-size:22px;
-    }
-
-    .btn-view-menu{
-
-        height:62px;
-    }
-
-    .bottom-section{
-
-        bottom:10px;
-    }
+  .glass-top{height:300px}
+  .logo-wrapper{top:88px;width:96px;height:96px}
+  .restaurant-logo{width:96px;height:96px}
+  .profile-info{top:195px}
+  .restaurant-title{font-size:21px}
+  .restaurant-subtitle{font-size:14px}
+  .restaurant-description{margin-top:7px;padding-top:7px;font-size:10px}
+  .status-badge{top:355px;height:42px;width:112px;font-size:13px}
+  .glass-icon-btn{height:54px;font-size:21px}
+  .btn-view-menu{height:55px;font-size:17px}
+  .bottom-section{bottom:9px}
 }
-
-
-/* =====================================================
-   ارتفاع خیلی کم
-===================================================== */
 
 @media(max-height:650px){
-
-    .glass-top{
-
-        height:275px;
-    }
-
-    .logo-wrapper{
-
-        top:82px;
-
-        width:88px;
-        height:88px;
-    }
-
-    .restaurant-logo span{
-
-        font-size:36px;
-    }
-
-    .profile-info{
-
-        top:182px;
-    }
-
-    .restaurant-title{
-
-        font-size:20px;
-    }
-
-    .restaurant-subtitle{
-
-        font-size:14px;
-    }
-
-    .restaurant-description{
-
-        font-size:9px;
-
-        margin-top:5px;
-    }
-
-    .glass-second{
-
-        top:275px;
-    }
-
-    .status-badge{
-
-        top:355px;
-
-        height:44px;
-
-        font-size:14px;
-    }
-
-    .glass-icon-btn{
-
-        height:50px;
-
-        font-size:20px;
-    }
-
-    .btn-view-menu{
-
-        height:56px;
-
-        font-size:18px;
-    }
+  .top-nav{top:10px}
+  .nav-btn{width:50px;height:50px}
+  .glass-top{height:275px}
+  .logo-wrapper{top:78px;width:86px;height:86px}
+  .restaurant-logo{width:86px;height:86px}
+  .profile-info{top:175px}
+  .restaurant-title{font-size:19px}
+  .restaurant-subtitle{font-size:13px}
+  .restaurant-description{font-size:9px;margin-top:4px;padding-top:5px}
+  .status-badge{top:325px;height:40px;width:105px;font-size:12px}
+  .glass-icon-btn{height:49px;font-size:19px}
+  .btn-view-menu{height:51px;font-size:16px}
 }
-
 </style>
 </head>
 
-
 <body>
-
 <div class="app-container">
 
+  <!-- عکس های صفحه وسط -->
+  <div class="bg-slider" aria-hidden="true">
+    <div class="bg-slide active" style="background-image:url('20245.jpg')"></div>
+    <div class="bg-slide" style="background-image:url('20912.jpg')"></div>
+    <div class="bg-slide" style="background-image:url('20910.jpg')"></div>
+    <div class="bg-slide" style="background-image:url('20911.jpg')"></div>
+    <div class="bg-slide" style="background-image:url('20913.jpg')"></div>
+    <div class="bg-slide" style="background-image:url('20247.jpg')"></div>
+    <div class="bg-slide" style="background-image:url('20589.jpg')"></div>
+  </div>
 
-    <!-- =================================================
-         BACKGROUND
-    ================================================== -->
+  <div class="bg-overlay"></div>
 
-    <div class="bg-slider">
+  <!-- دکمه های بالا -->
+  <div class="top-nav">
+    <button class="nav-btn" onclick="goBack()" aria-label="بازگشت"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="nav-btn" onclick="openSideMenu()" aria-label="منو"><i class="fa-solid fa-bars"></i></button>
+  </div>
 
-        <div
-            class="bg-slide active"
-            style="
-            background-image:url('../b/photo_5902135692026909354_w.jpg');
-            ">
-        </div>
+  <!-- شیشه اصلی هدر -->
+  <div class="glass-top"></div>
 
-        <div
-            class="bg-slide"
-            style="
-            background-image:url('../b/photo_5902135692026909355_w.jpg');
-            ">
-        </div>
+  <!-- لوگو -->
+  <div class="logo-wrapper">
+    <img src="logo.png" class="restaurant-logo" alt="لوگوی واحه">
+    <div class="verified-badge"><i class="fa-solid fa-check"></i></div>
+  </div>
 
-        <div
-            class="bg-slide"
-            style="
-            background-image:url('../b/photo_5902135692026909360_w.jpg');
-            ">
-        </div>
+  <!-- نام مجموعه -->
+  <div class="profile-info">
+    <h1 class="restaurant-title">هتل رستوران واحه</h1>
+    <div class="restaurant-subtitle">Vaahe Hotel Restaurant</div>
+    <div class="restaurant-description">واحه یعنی آبادی در میان ریگستان</div>
+  </div>
 
-        <div
-            class="bg-slide"
-            style="
-            background-image:url('../b/photo_5902135692026909361_w.jpg');
-            ">
-        </div>
+  <!-- Open شبیه لیلو، بدون نقطه سبز -->
+  <div class="status-badge">Open</div>
 
+  <!-- آیکون ها و مشاهده منو -->
+  <div class="bottom-section">
+    <div class="action-icons-row">
+      <button class="glass-icon-btn" onclick="showHours(event)" aria-label="ساعت کاری"><i class="fa-regular fa-clock"></i></button>
+      <a href="https://instagram.com/vaahe_cafe_hotel" target="_blank" rel="noopener" class="glass-icon-btn" aria-label="اینستاگرام"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.google.com/maps/search/?api=1&query=هتل+رستوران+واحه+شاندیز+مشهد" target="_blank" rel="noopener" class="glass-icon-btn" aria-label="لوکیشن"><i class="fa-solid fa-location-dot"></i></a>
+      <button class="glass-icon-btn" onclick="showContact(event)" aria-label="تماس"><i class="fa-solid fa-phone"></i></button>
     </div>
 
+    <a href="menu.html" class="btn-view-menu">مشاهده منو</a>
+  </div>
 
-    <div class="bg-overlay"></div>
-
-
-    <!-- =================================================
-         TOP BUTTONS
-         روی شیشه
-    ================================================== -->
-
-    <div class="top-nav">
-
-        <!-- برگشت -->
-
-        <button
-            class="nav-btn"
-            onclick="goBack()">
-
-            <i class="fa-solid fa-chevron-left"></i>
-
-        </button>
-        <!-- منوی سه خط -->
-
-        <button
-            class="nav-btn">
-
-            <i class="fa-solid fa-bars"></i>
-
-        </button>
-
+  <!-- پنجره ساعت کاری -->
+  <div class="modal-backdrop" id="hoursModal" onclick="closeModalIfBackdrop(event,'hoursModal')">
+    <div class="glass-modal">
+      <button class="modal-close" onclick="closeModal('hoursModal')" aria-label="بستن">×</button>
+      <div class="modal-title">ساعات کاری مجموعه</div>
+      <div class="hours-list">
+        <div class="hour-row"><strong>شنبه</strong><span>12:00 تا 24:00</span></div>
+        <div class="hour-row"><strong>یکشنبه</strong><span>08:00 24:00</span></div>
+        <div class="hour-row"><strong>دوشنبه</strong><span>08:00 تا 24:00</span></div>
+        <div class="hour-row"><strong>سه‌شنبه</strong><span>08:00 تا 24:00</span></div>
+        <div class="hour-row"><strong>چهارشنبه</strong><span>08:00 تا 24:00</span></div>
+        <div class="hour-row"><strong>پنجشنبه</strong><span>08:00 تا 24:00</span></div>
+        <div class="hour-row"><strong>جمعه</strong><span>08:00 تا 24:00</span></div>
+      </div>
     </div>
+  </div>
 
-
-    <!-- =================================================
-         شیشه اصلی
-    ================================================== -->
-
-    <div class="glass-top"></div>
-
-
-    <!-- شیشه دوم -->
-
-    <div class="glass-second"></div>
-
-
-    <!-- =================================================
-         LOGO
-    ================================================== -->
-
-    <div class="logo-wrapper">
-
-        <div class="restaurant-logo">
-
-            <span>و</span>
-
-        </div>
-
-
-        <div class="verified-badge">
-
-            <i class="fa-solid fa-check"></i>
-
-        </div>
-
+  <!-- پنجره تماس -->
+  <div class="modal-backdrop" id="contactModal" onclick="closeModalIfBackdrop(event,'contactModal')">
+    <div class="glass-modal">
+      <button class="modal-close" onclick="closeModal('contactModal')" aria-label="بستن">×</button>
+      <div class="modal-title">ارتباط با ما</div>
+      <div class="contact-box">
+        <strong>رزرو و تماس</strong>
+        <a href="tel:09024114902">۰۹۰۲۴۱۱۴۹۰۲</a>
+      </div>
     </div>
+  </div>
 
+  <!-- پنل سه خط -->
+  <div class="side-menu-backdrop" id="sideBackdrop" onclick="closeSideMenu()"></div>
+  <aside class="side-menu" id="sideMenu">
+    <button class="side-close" onclick="closeSideMenu()" aria-label="بستن">×</button>
+    <img src="logo_circle_transparent.png" class="side-logo" alt="لوگوی واحه">
+    <div class="side-title">هتل رستوران واحه</div>
+    <div class="side-subtitle">VAAHE HOTEL RESTAURANT</div>
+    <div class="side-divider"></div>
 
-    <!-- =================================================
-         NAME
-    ================================================== -->
-
-    <div class="profile-info">
-
-        <h1 class="restaurant-title">
-
-            هتل رستوران واحه
-
-        </h1>
-
-
-        <div class="restaurant-subtitle">
-
-            Vaahe Hotel Restaurant
-
-        </div>
-
-
-        <div class="restaurant-description">
-
-            واحه یعنی آبادی در میان ریگستان
-
-        </div>
-
-    </div>
-
-
-    <!-- =================================================
-         OPEN
-    ================================================== -->
-
-    <div class="status-badge">
-
-        <span>
-            Open
-        </span>
-
-        <span class="status-dot"></span>
-
-    </div>
-
-
-    <!-- =================================================
-         BOTTOM
-    ================================================== -->
-
-    <div class="bottom-section">
-
-
-        <!-- آیکون ها -->
-
-        <div class="action-icons-row">
-
-
-            <!-- ساعت -->
-
-            <a
-                href="#"
-                class="glass-icon-btn"
-                onclick="showHours(event)">
-
-                <i class="fa-regular fa-clock"></i>
-
-            </a>
-
-
-            <!-- اینستاگرام -->
-
-            <a
-                href="https://instagram.com/vaahe_cafe_hotel"
-                target="_blank"
-                class="glass-icon-btn">
-
-                <i class="fa-brands fa-instagram"></i>
-
-            </a>
-
-
-            <!-- لوکیشن -->
-
-            <a
-                href="https://www.google.com/maps/search/?api=1&query=هتل+رستوران+واحه+شاندیز+مشهد"
-                target="_blank"
-                class="glass-icon-btn">
-
-                <i class="fa-solid fa-location-dot"></i>
-
-            </a>
-
-
-            <!-- تماس -->
-
-            <a
-                href="tel:09024114902"
-                class="glass-icon-btn">
-
-                <i class="fa-solid fa-phone"></i>
-
-            </a>
-
-        </div>
-
-
-        <!-- مشاهده منو -->
-
-        <a
-            href="menu.html"
-            class="btn-view-menu">
-
-            مشاهده منو
-
-        </a>
-
-    </div>
-
+    <a class="side-item" href="index.html"><i class="fa-solid fa-house"></i><span>صفحه اصلی</span><i class="fa-solid fa-chevron-left"></i></a>
+    <a class="side-item" href="menu.html"><i class="fa-solid fa-utensils"></i><span>مشاهده منو</span><i class="fa-solid fa-chevron-left"></i></a>
+    <button class="side-item" onclick="showHours();closeSideMenu()"><i class="fa-regular fa-clock"></i><span>ساعت کاری مجموعه</span><i class="fa-solid fa-chevron-left"></i></button>
+    <a class="side-item" href="https://instagram.com/vaahe_cafe_hotel" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i><span>اینستاگرام</span><i class="fa-solid fa-chevron-left"></i></a>
+    <a class="side-item" href="https://www.google.com/maps/search/?api=1&query=هتل+رستوران+واحه+شاندیز+مشهد" target="_blank" rel="noopener"><i class="fa-solid fa-location-dot"></i><span>موقعیت واحه</span><i class="fa-solid fa-chevron-left"></i></a>
+    <button class="side-item" onclick="showContact();closeSideMenu()"><i class="fa-solid fa-phone"></i><span>تماس با ما</span><i class="fa-solid fa-chevron-left"></i></button>
+  </aside>
 
 </div>
 
-
 <script>
-
-/* =====================================================
-   SLIDER
-===================================================== */
-
-const slides =
-    document.querySelectorAll(".bg-slide");
-
-let currentSlide = 0;
-
-setInterval(function(){
-
-    slides[currentSlide]
-        .classList
-        .remove("active");
-
-    currentSlide =
-        (currentSlide + 1) % slides.length;
-
-    slides[currentSlide]
-        .classList
-        .add("active");
-
-},7000);
-
-
-/* =====================================================
-   BACK
-===================================================== */
+/* فقط محو شدن عکس ها — بدون زوم و بدون حرکت */
+const slides=document.querySelectorAll('.bg-slide');
+let currentSlide=0;
+setInterval(()=>{
+  slides[currentSlide].classList.remove('active');
+  currentSlide=(currentSlide+1)%slides.length;
+  slides[currentSlide].classList.add('active');
+},6000);
 
 function goBack(){
-
-    if(window.history.length > 1){
-
-        window.history.back();
-
-    }else{
-
-        window.location.href="index.html";
-
-    }
-
+  if(window.history.length>1){window.history.back();}
+  else{window.location.href='index.html';}
 }
-
-
-/* =====================================================
-   HOURS
-===================================================== */
 
 function showHours(event){
-
-    event.preventDefault();
-
-    alert(
-        "ساعت کاری مجموعه\n\n" +
-        "هر روز از ۸ صبح تا ۱۲ شب\n\n" +
-        "صبحانه: ۸ تا ۱۱ صبح\n\n" +
-        "صبح‌هاتون رو با عطر قهوه و یک صبحانه دلچسب در واحه شروع کنید ☕"
-    );
-
+  if(event) event.preventDefault();
+  document.getElementById('hoursModal').classList.add('active');
 }
 
-</script>
+function showContact(event){
+  if(event) event.preventDefault();
+  document.getElementById('contactModal').classList.add('active');
+}
 
+function closeModal(id){
+  document.getElementById(id).classList.remove('active');
+}
+
+function closeModalIfBackdrop(event,id){
+  if(event.target.id===id) closeModal(id);
+}
+
+function openSideMenu(){
+  document.getElementById('sideMenu').classList.add('active');
+  document.getElementById('sideBackdrop').classList.add('active');
+}
+
+function closeSideMenu(){
+  document.getElementById('sideMenu').classList.remove('active');
+  document.getElementById('sideBackdrop').classList.remove('active');
+}
+
+window.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    closeSideMenu();
+    closeModal('hoursModal');
+    closeModal('contactModal');
+  }
+});
+</script>
 </body>
 </html>

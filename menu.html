@@ -118,6 +118,135 @@ body{
 }
 
 /* =========================
+   VAAHE / LILO STYLE HEADER
+========================= */
+.logo-wrap{
+    position:relative;
+    width:116px;
+    height:116px;
+    margin:0 auto;
+}
+
+.logo{
+    width:116px;
+    height:116px;
+    object-fit:cover;
+    border-radius:50%;
+    border:5px solid rgba(255,255,255,.97);
+    background:#fff;
+    box-shadow:
+        0 0 0 2px rgba(255,255,255,.16),
+        0 10px 35px rgba(0,0,0,.45);
+}
+
+.verified-badge{
+    position:absolute;
+    right:-2px;
+    bottom:1px;
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#159fe8;
+    color:#fff;
+    border:3px solid #fff;
+    font-family:Arial,sans-serif;
+    font-size:17px;
+    font-weight:900;
+    line-height:1;
+    box-shadow:0 5px 15px rgba(0,0,0,.35);
+}
+
+.header{
+    text-align:center;
+    margin-bottom:24px;
+    padding:24px 18px 21px;
+    border-radius:30px;
+    background:rgba(255,255,255,.075);
+    border:1px solid rgba(255,255,255,.17);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    box-shadow:0 14px 45px rgba(0,0,0,.20);
+}
+
+.restaurant-title{
+    margin-top:13px;
+    font-size:25px;
+    font-weight:800;
+    line-height:1.6;
+}
+
+.restaurant-title:after{
+    content:"";
+    display:block;
+    width:74%;
+    height:1px;
+    margin:10px auto 0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.48),transparent);
+}
+
+.restaurant-english{
+    margin-top:7px;
+    font-size:11px;
+    color:rgba(255,255,255,.84);
+    direction:ltr;
+    letter-spacing:2px;
+}
+
+.search-box{
+    border-radius:22px;
+    background:rgba(255,255,255,.105);
+    border:1px solid rgba(255,255,255,.22);
+    box-shadow:0 10px 35px rgba(0,0,0,.18);
+}
+
+.category-card{
+    height:285px;
+    border-radius:24px;
+    border:1px solid rgba(255,255,255,.34);
+    box-shadow:0 12px 38px rgba(0,0,0,.40);
+}
+
+.card-content{
+    min-height:104px;
+    padding:15px 10px 17px;
+    background:rgba(28,37,33,.48);
+    backdrop-filter:blur(17px);
+    -webkit-backdrop-filter:blur(17px);
+    border-top:1px solid rgba(255,255,255,.16);
+}
+
+.title-row{gap:9px}
+.title-row::before,.title-row::after{
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.52));
+}
+.title-row::after{
+    background:linear-gradient(90deg,rgba(255,255,255,.52),transparent);
+}
+.card-title{font-size:16px}
+.card-english{font-size:10px;opacity:.78}
+.card-line{
+    width:34px;
+    height:2px;
+    margin-top:9px;
+    background:rgba(255,255,255,.60);
+}
+
+@media(max-width:600px){
+    .header{padding:20px 14px 18px;border-radius:27px}
+    .logo-wrap,.logo{width:104px;height:104px}
+    .verified-badge{width:29px;height:29px;right:-3px;bottom:0;font-size:16px}
+    .restaurant-title{font-size:23px}
+    .restaurant-title:after{width:78%}
+    .category-card{height:250px;border-radius:21px}
+    .card-content{min-height:92px;padding:13px 7px 14px}
+    .card-title{font-size:15px}
+}
+
+/* =========================
    HEADER
 ========================= */
 
@@ -291,15 +420,27 @@ body{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:8px;
+    gap:9px;
 }
 
+/* خط‌های ظریف و محو دو طرف عنوان، شبیه لیلو */
 .title-row::before,
 .title-row::after{
     content:"";
+    width:52px;
+    max-width:52px;
     height:1px;
-    background:rgba(255,255,255,.85);
-    flex:1;
+    flex:0 0 52px;
+    border-radius:999px;
+    opacity:.72;
+}
+
+.title-row::before{
+    background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.08) 18%, rgba(255,255,255,.55) 50%, rgba(255,255,255,.08) 82%, transparent 100%);
+}
+
+.title-row::after{
+    background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.08) 18%, rgba(255,255,255,.55) 50%, rgba(255,255,255,.08) 82%, transparent 100%);
 }
 
 .card-title{
@@ -317,11 +458,11 @@ body{
 }
 
 .card-line{
-    width:45px;
-    height:2px;
+    width:58px;
+    height:1px;
     margin:10px auto 0;
-    border-radius:10px;
-    background:rgba(255,255,255,.85);
+    border-radius:999px;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.48), transparent);
 }
 
 /* =========================
@@ -703,10 +844,13 @@ body{
 
     <header class="header">
 
-        <img
-            src="logo.png"
-            class="logo"
-            alt="واحه هتل رستوران">
+        <div class="logo-wrap">
+            <img
+                src="logo.png"
+                class="logo"
+                alt="واحه هتل رستوران">
+            <span class="verified-badge" aria-label="تایید شده">✓</span>
+        </div>
 
         <h1 class="restaurant-title">
             واحه هتل رستوران
@@ -817,302 +961,79 @@ setInterval(function(){
 
 },7000);
 
+/* بارگذاری اولیه عکس‌های منو برای جلوگیری از دیر ظاهر شدن */
+["20687.jpg","20688.jpg","20690.jpg","20691.jpg","20692.jpg","20693.jpg","20694.jpg","20695.jpg","20903.jpg"].forEach(function(src){
+    const img = new Image();
+    img.src = src;
+});
+
 
 /* =========================================
    دسته‌بندی‌ها
 ========================================= */
 
 const categories = [
-
-    {
-        id:"breakfast",
-        name:"صبحانه",
-        english:"Breakfast",
-        image:"photo_5902135692026909355_w.jpg"
-    },
-
-    {
-        id:"bakery",
-        name:"بیکری",
-        english:"Bakery",
-        image:"photo_5902135692026909354_w.jpg"
-    },
-
-    {
-        id:"appetizer",
-        name:"پیش غذا",
-        english:"Appetizer",
-        image:"photo_5902135692026909355_w.jpg"
-    },
-
-    {
-        id:"salad",
-        name:"سالادها",
-        english:"Salads",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        id:"burger",
-        name:"برگر",
-        english:"Burgers",
-        image:"photo_5902135692026909354_w.jpg"
-    },
-
-    {
-        id:"pizza",
-        name:"پیتزا ایتالیایی",
-        english:"Italian Pizza",
-        image:"photo_5902135692026909361_w.jpg"
-    },
-
-    {
-        id:"pasta",
-        name:"پاستا",
-        english:"Pasta",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        id:"steak",
-        name:"استیک",
-        english:"Steak",
-        image:"photo_5902135692026909361_w.jpg"
-    },
-
-    {
-        id:"vegetarian",
-        name:"وجترین",
-        english:"Vegetarian",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        id:"vegan",
-        name:"وگان",
-        english:"Vegan",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        id:"cold",
-        name:"نوشیدنی‌های سرد",
-        english:"Cold Drinks",
-        image:"photo_5902135692026909354_w.jpg"
-    },
-
-    {
-        id:"hot",
-        name:"نوشیدنی‌های گرم",
-        english:"Hot Coffee",
-        image:"photo_5902135692026909355_w.jpg"
-    },
-
-    {
-        id:"matcha",
-        name:"ماچا بار",
-        english:"Matcha Bar",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        id:"tea",
-        name:"چای و دمنوش",
-        english:"Tea & Herbal",
-        image:"photo_5902135692026909361_w.jpg"
-    }
-
+    {id:"appetizer", name:"پیش غذا", english:"Appetizer", image:"20693.jpg"},
+    {id:"breakfast", name:"صبحانه", english:"Breakfast", image:"20691.jpg"},
+    {id:"pizza", name:"پیتزا ایتالیایی", english:"Italian Pizza", image:"20688.jpg"},
+    {id:"salad", name:"سالادها", english:"Salads", image:"20692.jpg"},
+    {id:"bakery", name:"بیکری", english:"Bakery", image:"20691.jpg"},
+    {id:"burger", name:"برگر", english:"Burgers", image:"20687.jpg"},
+    {id:"pasta", name:"پاستا", english:"Pasta", image:"20690.jpg"},
+    {id:"steak", name:"استیک", english:"Steak", image:"20693.jpg"},
+    {id:"vegetarian", name:"وجترین", english:"Vegetarian", image:"20692.jpg"},
+    {id:"vegan", name:"وگان", english:"Vegan", image:"20692.jpg"},
+    {id:"coldcoffee", name:"نوشیدنی سرد بر پایه قهوه", english:"Iced Coffee", image:"20695.jpg"},
+    {id:"colddrinks", name:"نوشیدنی‌های سرد", english:"Cold Drinks", image:"20694.jpg"},
+    {id:"hot", name:"نوشیدنی‌های گرم", english:"Hot Coffee", image:"20695.jpg"},
+    {id:"tea", name:"چای و دمنوش", english:"Tea & Herbal", image:"20903.jpg"}
 ];
-
 
 /* =========================================
    آیتم‌های منو
 ========================================= */
 
 const menuItems = [
+    {category:"appetizer",name:"استیک لقمه‌ای",english:"Steak Bites",description:"تکه‌های گوشت گریل‌شده با دورچین مخصوص",price:"—",image:"20693.jpg"},
+    {category:"appetizer",name:"پیش‌غذای واحه",english:"Vaahe Appetizer",description:"ترکیبی از پیش‌غذاهای تازه و مخصوص",price:"—",image:"20692.jpg"},
 
-    {
-        category:"breakfast",
-        name:"صبحانه واحه",
-        english:"Vaahe Breakfast",
-        description:"صبحانه کامل و تازه واحه",
-        price:"—",
-        image:"photo_5902135692026909355_w.jpg"
-    },
+    {category:"breakfast",name:"صبحانه واحه",english:"Vaahe Breakfast",description:"صبحانه کامل با نان تازه و مخلفات",price:"—",image:"20691.jpg"},
+    {category:"breakfast",name:"صبحانه انگلیسی",english:"English Breakfast",description:"تخم‌مرغ، سوسیس، نان و مخلفات صبحانه",price:"—",image:"20691.jpg"},
 
-    {
-        category:"breakfast",
-        name:"صبحانه انگلیسی",
-        english:"English Breakfast",
-        description:"تخم مرغ، سوسیس، لوبیا و نان تازه",
-        price:"—",
-        image:"photo_5902135692026909355_w.jpg"
-    },
+    {category:"bakery",name:"نان تازه",english:"Fresh Bread",description:"نان تازه روزانه",price:"—",image:"20691.jpg"},
+    {category:"bakery",name:"بیکری واحه",english:"Vaahe Bakery",description:"انتخابی از نان و شیرینی تازه",price:"—",image:"20691.jpg"},
 
-    {
-        category:"bakery",
-        name:"نان تازه",
-        english:"Fresh Bread",
-        description:"نان تازه و روزانه",
-        price:"—",
-        image:"photo_5902135692026909354_w.jpg"
-    },
+    {category:"salad",name:"سالاد واحه",english:"Vaahe Salad",description:"سالاد تازه با سبزیجات متنوع",price:"—",image:"20692.jpg"},
 
-    {
-        category:"appetizer",
-        name:"سیب‌زمینی",
-        english:"French Fries",
-        description:"سیب‌زمینی ترد با سس مخصوص",
-        price:"—",
-        image:"photo_5902135692026909354_w.jpg"
-    },
+    {category:"pizza",name:"پیتزا مخصوص واحه",english:"Vaahe Pizza",description:"پیتزای ایتالیایی با تاپینگ متنوع",price:"—",image:"20688.jpg"},
+    {category:"pizza",name:"پیتزا سبزیجات",english:"Vegetable Pizza",description:"سبزیجات تازه و پنیر",price:"—",image:"20688.jpg"},
 
-    {
-        category:"appetizer",
-        name:"پیش غذای واحه",
-        english:"Vaahe Appetizer",
-        description:"ترکیبی از پیش‌غذاهای مخصوص",
-        price:"—",
-        image:"photo_5902135692026909354_w.jpg"
-    },
+    {category:"burger",name:"برگر کلاسیک",english:"Classic Burger",description:"برگر با نان تازه، سبزیجات و سیب‌زمینی",price:"—",image:"20687.jpg"},
+    {category:"burger",name:"چیزبرگر",english:"Cheeseburger",description:"برگر گوشت با پنیر و مخلفات",price:"—",image:"20687.jpg"},
 
-    {
-        category:"salad",
-        name:"سالاد واحه",
-        english:"Vaahe Salad",
-        description:"سالاد تازه با سبزیجات متنوع",
-        price:"—",
-        image:"photo_5902135692026909360_w.jpg"
-    },
+    {category:"pasta",name:"پاستا با استیک",english:"Steak Pasta",description:"پاستا خامه‌ای با تکه‌های استیک گریل‌شده",price:"—",image:"20690.jpg"},
+    {category:"pasta",name:"پاستا مخصوص",english:"Vaahe Pasta",description:"پاستای تازه با سس مخصوص واحه",price:"—",image:"20690.jpg"},
 
-    {
-        category:"burger",
-        name:"برگر کلاسیک",
-        english:"Classic Burger",
-        description:"برگر گوشت با نان تازه و مخلفات",
-        price:"—",
-        image:"photo_5902135692026909354_w.jpg"
-    },
+    {category:"steak",name:"استیک واحه",english:"Vaahe Steak",description:"استیک گریل‌شده با پوره و سبزیجات",price:"—",image:"20693.jpg"},
 
-    {
-        category:"burger",
-        name:"چیزبرگر",
-        english:"Cheeseburger",
-        description:"برگر گوشت، پنیر و مخلفات",
-        price:"—",
-        image:"photo_5902135692026909354_w.jpg"
-    },
+    {category:"vegetarian",name:"پاستای سبزیجات",english:"Vegetarian Pasta",description:"پاستا با سبزیجات تازه",price:"—",image:"20690.jpg"},
+    {category:"vegetarian",name:"سالاد وجترین",english:"Vegetarian Salad",description:"سالاد تازه و متنوع",price:"—",image:"20692.jpg"},
 
-    {
-        category:"pizza",
-        name:"پیتزا مارگاریتا",
-        english:"Margherita",
-        description:"سس گوجه، پنیر و ریحان",
-        price:"—",
-        image:"photo_5902135692026909361_w.jpg"
-    },
+    {category:"vegan",name:"سالاد وگان",english:"Vegan Salad",description:"سبزیجات تازه بدون فرآورده حیوانی",price:"—",image:"20692.jpg"},
+    {category:"vegan",name:"پاستای وگان",english:"Vegan Pasta",description:"پاستا با سبزیجات و سس گیاهی",price:"—",image:"20690.jpg"},
 
-    {
-        category:"pizza",
-        name:"پیتزا سبزیجات",
-        english:"Vegetable Pizza",
-        description:"سبزیجات تازه و پنیر",
-        price:"—",
-        image:"photo_5902135692026909361_w.jpg"
-    },
+    {category:"coldcoffee",name:"آیس لاته",english:"Iced Latte",description:"اسپرسو، شیر و یخ؛ خنک و خامه‌ای",price:"—",image:"20695.jpg"},
+    {category:"coldcoffee",name:"آیس آمریکانو",english:"Iced Americano",description:"اسپرسو و آب خنک با یخ",price:"—",image:"20695.jpg"},
+    {category:"coldcoffee",name:"آیس موکا",english:"Iced Mocha",description:"قهوه سرد با شکلات و شیر",price:"—",image:"20695.jpg"},
 
-    {
-        category:"pasta",
-        name:"پاستا",
-        english:"Pasta",
-        description:"پاستای تازه با سس مخصوص",
-        price:"—",
-        image:"photo_5902135692026909360_w.jpg"
-    },
+    {category:"colddrinks",name:"نوشیدنی خنک واحه",english:"Vaahe Cooler",description:"نوشیدنی سرد و میوه‌ای",price:"—",image:"20694.jpg"},
 
-    {
-        category:"steak",
-        name:"استیک",
-        english:"Steak",
-        description:"استیک گریل شده با دورچین",
-        price:"—",
-        image:"photo_5902135692026909361_w.jpg"
-    },
+    {category:"hot",name:"اسپرسو",english:"Espresso",description:"اسپرسوی تازه",price:"—",image:"20695.jpg"},
+    {category:"hot",name:"آمریکانو",english:"Americano",description:"اسپرسو و آب داغ",price:"—",image:"20695.jpg"},
 
-    {
-        category:"vegetarian",
-        name:"پاستای سبزیجات",
-        english:"Vegetarian Pasta",
-        description:"پاستا با سبزیجات تازه",
-        price:"—",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        category:"vegetarian",
-        name:"سالاد وجترین",
-        english:"Vegetarian Salad",
-        description:"سالاد تازه و متنوع",
-        price:"—",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        category:"vegan",
-        name:"سالاد وگان",
-        english:"Vegan Salad",
-        description:"سبزیجات تازه بدون فرآورده حیوانی",
-        price:"—",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        category:"vegan",
-        name:"پاستای وگان",
-        english:"Vegan Pasta",
-        description:"پاستا با سبزیجات و سس گیاهی",
-        price:"—",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        category:"cold",
-        name:"آیس کافی",
-        english:"Iced Coffee",
-        description:"قهوه سرد و خنک",
-        price:"—",
-        image:"photo_5902135692026909354_w.jpg"
-    },
-
-    {
-        category:"hot",
-        name:"اسپرسو",
-        english:"Espresso",
-        description:"اسپرسوی تازه",
-        price:"—",
-        image:"photo_5902135692026909355_w.jpg"
-    },
-
-    {
-        category:"matcha",
-        name:"ماچا",
-        english:"Matcha",
-        description:"ماچای تازه",
-        price:"—",
-        image:"photo_5902135692026909360_w.jpg"
-    },
-
-    {
-        category:"tea",
-        name:"چای و دمنوش",
-        english:"Tea & Herbal",
-        description:"چای و دمنوش‌های گرم",
-        price:"—",
-        image:"photo_5902135692026909361_w.jpg"
-    }
-
+    {category:"tea",name:"چای ایرانی",english:"Persian Tea",description:"چای تازه‌دم سرو شده در سرویس مخصوص",price:"—",image:"20903.jpg"},
+    {category:"tea",name:"دمنوش واحه",english:"Vaahe Herbal Tea",description:"دمنوش‌های گیاهی و معطر",price:"—",image:"20903.jpg"}
 ];
-
 
 /* =========================================
    نمایش دسته‌بندی‌ها
@@ -1434,15 +1355,7 @@ function goBack(){
 
     }
 
-    if(window.history.length > 1){
-
-        window.history.back();
-
-    }else{
-
-        window.location.href = "index.html";
-
-    }
+    window.location.href = "index.html";
 
 }
 
